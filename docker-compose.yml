@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  # Static frontend for AI Lokal — served by Nginx Alpine
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: aikom/web:latest
+    container_name: aikom-web
+    ports:
+      # host:container  (expose 8080 -> 80)
+      - "8080:80"
+    restart: unless-stopped
+    # Optional: mount local files for live development (uncomment to use)
+    # volumes:
+    #   - ./index.html:/usr/share/nginx/html/index.html:ro
+    #   - ./css:/usr/share/nginx/html/css:ro
+    #   - ./js:/usr/share/nginx/html/js:ro
+
+  # Optional placeholder for a future backend API (used by form submissions).
+  # Uncomment and configure when you add a backend.
+  # api:
+  #   image: node:20-alpine
+  #   working_dir: /app
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - NODE_ENV=production
+  #   command: ["node", "server.js"]

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masuk &middot; AI Lokal</title>
+  <meta name="description" content="Login ke akun AI Lokal Anda." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>" />
+  <style>
+    /* ---------- Login page specific ---------- */
+    .login-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 12% 20%, rgba(79, 70, 229, 0.06), transparent 50%),
+        radial-gradient(circle at 88% 80%, rgba(245, 158, 11, 0.07), transparent 50%),
+        var(--color-bg);
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px;
+    }
+
+    .login-card .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .login-card .logo-icon { font-size: 1.8rem; }
+
+    .login-card h1 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .login-card .sub {
+      color: var(--color-text-light);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .login-card .form-group { margin-bottom: 16px; }
+
+    .login-card .form-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+
+    .login-card .form-group input,
+    .login-card .form-group select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 1rem;
+      background: var(--color-surface);
+      color: var(--color-text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .login-card .form-group input:focus,
+    .login-card .form-group select:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px var(--color-primary-light);
+    }
+
+    .login-card .form-group .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--color-text-light);
+      margin-top: 6px;
+    }
+
+    .login-card .form-group .checkbox input {
+      width: auto;
+      accent-color: var(--color-primary);
+    }
+
+    .login-card .forgot {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    .login-card .forgot:hover { text-decoration: underline; }
+
+    .login-card .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .login-card .signup-link {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+      margin-top: 20px;
+    }
+
+    .login-card .signup-link a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    .login-card .signup-link a:hover { text-decoration: underline; }
+
+    .login-card .demo-note {
+      margin-top: 16px;
+      font-size: 0.75rem;
+      color: var(--color-text-light);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="logo">
+        <span class="logo-icon">🤖</span>
+        <span>AI<span class="gradient-text" style="color:var(--color-primary);">Lokal</span></span>
+      </div>
+      <h1>Masuk</h1>
+      <p class="sub">Silakan login ke akun Anda.</p>
+
+      <form class="contact-form" id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input
+            type="email"
+            id="loginEmail"
+            name="email"
+            required
+            placeholder="email@perusahaan.com"
+            autocomplete="email"
+            spellcheck="false"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Kata Sandi</label>
+          <input
+            type="password"
+            id="loginPassword"
+            name="password"
+            required
+            placeholder="Kata sandi Anda"
+            autocomplete="current-password"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox">
+            <input type="checkbox" name="remember" /> Ingat saya
+          </label>
+        </div>
+
+        <div class="form-group">
+          <a href="#kontak" class="forgot">Lupa kata sandi?</a>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary">Masuk</button>
+        </div>
+      </form>
+
+      <p class="signup-link">Belum punya akun? <a href="#">Daftar</a></p>
+      <p class="demo-note">Demo statis &mdash; tidak akan menyimpan data.</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var form = document.getElementById('loginForm');
+      if (!form) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var email = document.getElementById('loginEmail').value.trim();
+        var password = document.getElementById('loginPassword').value.trim();
+
+        if (!email || !password) {
+          alert('Silakan isi email dan kata sandi.');
+          return;
+        }
+
+        var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRe.test(email)) {
+          alert('Format email tidak valid.');
+          return;
+        }
+
+        // Demo only: in production this is replaced with a
+        // serverless function or backend endpoint.
+        console.log('Login attempt:', { email: email });
+        alert('Login berhasil (demo). Anda akan diarahkan ke halaman utama.');
+        form.reset();
+        window.location.href = '#';
+      });
+    })();
+  </script>
+</body>
+</html>
